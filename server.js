@@ -1,12 +1,18 @@
 var http = require('http');
+var express = require('express');
 
-http.createServer(function (req, res) {
-    setTimeout(function () {
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end('Hello World ...\n');
-    }, 2000);
-}).listen(8000,"127.0.0.1",function () {
+var app = express();
+
+app.get('/hello', function(req, res){
+    res.status(200).send("Hello World");
+});
+
+//app.use('/public', express.static(__dirname + '/public'));
+
+http.createServer(app).listen(8000,"127.0.0.1",function () {
     console.log((new Date()) + 'Server is listening on port ' + 8000);
 });
+
+
 
 
